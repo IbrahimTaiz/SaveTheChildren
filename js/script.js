@@ -23,3 +23,10 @@ loginForm.addEventListener('submit', e => {
     alert('Invalid credentials');
   }
 });
+document.getElementById('donate-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  if (!email.includes('@') || amount <= 0) return alert("Invalid input");
+  document.getElementById('donation-msg').style.display = 'block';
+});
