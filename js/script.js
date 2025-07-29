@@ -30,3 +30,6 @@ document.getElementById('donate-form').addEventListener('submit', e => {
   if (!email.includes('@') || amount <= 0) return alert("Invalid input");
   document.getElementById('donation-msg').style.display = 'block';
 });
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+  document.querySelector('.menu-links').classList.toggle('show');
+});
