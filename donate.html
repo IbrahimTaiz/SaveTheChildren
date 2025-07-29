@@ -1,13 +1,56 @@
-<form id="donate-form">
-  <input type="email" id="email" required placeholder="Email" />
-  <input type="number" id="amount" required placeholder="Amount" />
-  <button>Donate</button>
-</form>
-<p id="donation-msg" style="display:none; color:green">Thank you!</p>
-document.getElementById('donate-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const amount = parseFloat(document.getElementById('amount').value);
-  if (!email.includes('@') || amount <= 0) return alert("Invalid input");
-  document.getElementById('donation-msg').style.display = 'block';
-});
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate - Save The Children</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  
+<header>
+  <nav>
+    <button class="menu-toggle" onclick="document.querySelector('.menu-links').classList.toggle('show')">☰</button>
+    <div class="menu-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="donate.html">Donate</a>
+      <a href="map.html">Map</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="contact.html">Contact</a>
+      <button id="toggle-mode" class="toggle-mode">Toggle Mode</button>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <form id="donate-form">
+      <input type="email" id="email" placeholder="Your Email" required />
+      <input type="number" id="amount" placeholder="Donation Amount (USD)" required />
+      <button type="submit">Donate</button>
+    </form>
+    <p id="donation-msg" style="color: green; display: none;">🎉 Thank you for your support!</p>
+  </main>
+  <script>
+    document.getElementById('donate-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const message = document.getElementById('donation-msg');
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!validEmail.test(email)) {
+        alert("Please enter a valid email.");
+        return;
+      }
+      if (isNaN(amount) || amount <= 0) {
+        alert("Amount must be a positive number.");
+        return;
+      }
+      message.style.display = "block";
+    });
+  </script>
+</body>
+</html>
