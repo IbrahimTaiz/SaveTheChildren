@@ -38,3 +38,9 @@ body {
 .project-card:hover {
   background: #ddd;
 }
+.menu-toggle { display: none; }
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  .menu-links { display: none; }
+  .menu-links.show { display: flex; flex-direction: column; }
+}
