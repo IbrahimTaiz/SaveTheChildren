@@ -4,3 +4,10 @@
   <button>Donate</button>
 </form>
 <p id="donation-msg" style="display:none; color:green">Thank you!</p>
+document.getElementById('donate-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  if (!email.includes('@') || amount <= 0) return alert("Invalid input");
+  document.getElementById('donation-msg').style.display = 'block';
+});
