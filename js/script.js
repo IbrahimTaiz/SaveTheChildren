@@ -10,3 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('dark');
   }
 });
+const USERNAME = 'admin', PASSWORD = '1234';
+
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const u = loginForm.username.value.trim();
+  const p = loginForm.password.value.trim();
+  if (u === USERNAME && p === PASSWORD) {
+    localStorage.setItem('loggedInUser', u);
+    userDisplay.innerHTML = `Logged in as ${u}`;
+  } else {
+    alert('Invalid credentials');
+  }
+});
