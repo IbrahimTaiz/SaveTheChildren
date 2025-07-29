@@ -1,0 +1,23 @@
+:root {
+  --bg: #fff;
+  --text: #111;
+}
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+.dark {
+  --bg: #111;
+  --text: #fff;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 90%;
+  }
+}
