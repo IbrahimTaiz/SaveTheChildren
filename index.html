@@ -5,12 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Save The Children</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="font-sans bg-white text-black m-0 p-0 transition duration-300 ease-in-out leading-6">
 
-<header>
-  <nav>
+<header class="p-4 text-center">
+  <nav class="bg-primary flex flex-wrap justify-center gap-2">
     <button class="menu-toggle" onclick="document.querySelector('.menu-links').classList.toggle('show')">☰</button>
     <div class="menu-links">
       <a href="index.html">Home</a>
@@ -43,62 +43,62 @@
   </div>
   <p id="user-display" style="margin-top: 0.5rem;"></p>
 </div>
-<main><section><h2>Our Projects</h2><div class='project-grid'>
-    <div class='project-card'>
+<main><section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4"><h2>Our Projects</h2><div class='project-grid'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project1.jpg" alt="Project 1" style="width:100%; border-radius: 4px;" />
         <h3>Project #1</h3>
         <p>Short description of project 1.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project2.jpg" alt="Project 2" style="width:100%; border-radius: 4px;" />
         <h3>Project #2</h3>
         <p>Short description of project 2.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project3.jpg" alt="Project 3" style="width:100%; border-radius: 4px;" />
         <h3>Project #3</h3>
         <p>Short description of project 3.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project4.jpg" alt="Project 4" style="width:100%; border-radius: 4px;" />
         <h3>Project #4</h3>
         <p>Short description of project 4.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project5.jpg" alt="Project 5" style="width:100%; border-radius: 4px;" />
         <h3>Project #5</h3>
         <p>Short description of project 5.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project6.jpg" alt="Project 6" style="width:100%; border-radius: 4px;" />
         <h3>Project #6</h3>
         <p>Short description of project 6.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project7.jpg" alt="Project 7" style="width:100%; border-radius: 4px;" />
         <h3>Project #7</h3>
         <p>Short description of project 7.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project8.jpg" alt="Project 8" style="width:100%; border-radius: 4px;" />
         <h3>Project #8</h3>
         <p>Short description of project 8.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project9.jpg" alt="Project 9" style="width:100%; border-radius: 4px;" />
         <h3>Project #9</h3>
         <p>Short description of project 9.</p>
     </div>
     
-    <div class='project-card'>
+    <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
         <img src="assets/images/project10.jpg" alt="Project 10" style="width:100%; border-radius: 4px;" />
         <h3>Project #10</h3>
         <p>Short description of project 10.</p>
@@ -107,7 +107,7 @@
   <div id="toast" class="toast"></div>
   <script src="js/script.js"></script>
 
-<footer style="text-align: center; padding: 1rem; background: #ddd; margin-top: 2rem;">
+<footer class="p-4 text-center">
   <p>&copy; 2025 Save The Children. All rights reserved.</p>
 </footer>
 
