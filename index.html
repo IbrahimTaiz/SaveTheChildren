@@ -6,19 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Save The Children</title>
     <link href="./src/output.css" rel="stylesheet">
-
 </head>
 
 <body class="font-sans bg-white text-black dark:bg-gray-900 dark:text-white m-0 p-0 transition duration-300 ease-in-out leading-6">
-
     <header class="p-4 text-center sticky top-0 z-50 bg-white shadow-md">
         <nav>
             <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap">
-                <!-- Logo فقط -->
                 <div class="flex items-center flex-shrink-0 mr-4">
                     <img src="assets/images/logo.png" alt="Logo" class="h-16 w-auto object-contain" />
                 </div>
-                <!-- زر الهامبرغر للجوال -->
                 <div class="block lg:hidden">
                     <button id="menu-toggle" class="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-300 hover:bg-gray-100 focus:outline-none">
                     <svg class="fill-current h-5 w-5" viewBox="0 0 20 20"><title>Menu</title>
@@ -26,7 +22,6 @@
                     </svg>
                 </button>
                 </div>
-                <!-- روابط القائمة -->
                 <div id="menu-links" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block transition-all duration-300">
                     <div class="text-sm lg:flex-grow">
                         <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="index.html">Home</a>
@@ -45,22 +40,18 @@
         </nav>
     </header>
     <script>
-        // filepath: d:\SaveTheChildren\index.html
         document.addEventListener('DOMContentLoaded', function() {
             const toggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('menu-links');
             toggle.addEventListener('click', function() {
                 menu.classList.toggle('hidden');
             });
-
-            // Login modal logic
             const loginBtn = document.getElementById('login-btn');
             const loginModal = document.getElementById('login-modal');
             const closeLogin = document.getElementById('close-login');
             const loginForm = document.getElementById('login-form');
             const loginError = document.getElementById('login-error');
 
-            // Simple base64 encode/decode for demo (not secure for real apps)
             function encode(str) {
                 return btoa(unescape(encodeURIComponent(str)));
             }
@@ -68,7 +59,6 @@
             function decode(str) {
                 return decodeURIComponent(escape(atob(str)));
             }
-
             loginBtn.addEventListener('click', () => {
                 loginModal.classList.remove('hidden');
                 loginError.classList.add('hidden');
@@ -91,17 +81,12 @@
                     loginError.classList.remove('hidden');
                 }
             });
-
             const toggleMode = document.getElementById('toggle-mode');
             toggleMode.addEventListener('click', function() {
                 document.body.classList.toggle('dark');
             });
         });
     </script>
-
-
-
-    <!-- نافذة تسجيل الدخول -->
     <div id="login-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 hidden">
         <div class="bg-white rounded shadow-lg p-6 w-full max-w-xs">
             <h2 class="text-lg font-bold mb-4 text-center">Login</h2>
@@ -158,32 +143,26 @@
                 <h3>Emergency Relief</h3>
                 <p>Delivering urgent aid and support to families during crises and disasters.</p>
             </div>
-
         </section>
     </main>
     <div id="toast " class="toast "></div>
     <script src="js/script.js "></script>
-
     <footer class="bg-gray-900 text-white mt-8">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-4 gap-4">
-            <!-- شعار المنظمة -->
             <div class="mb-4 md:mb-0 flex items-center gap-2">
                 <img src="assets/images/logo.png" alt="Logo" class="h-10 w-auto object-contain bg-white rounded p-1" />
                 <span class="font-bold text-lg"></span>
             </div>
-            <!-- معلومات التواصل -->
             <div class="text-center md:text-left">
                 <p class="mb-1"><span class="font-semibold">Email:</span> info@savethechildren.org</p>
                 <p class="mb-1"><span class="font-semibold">Phone:</span> +1 234 567 890</p>
                 <p class="mb-1"><span class="font-semibold">Address:</span> 123 Hope Street, City, Country</p>
             </div>
-            <!-- حقوق النشر -->
             <div class="text-sm mt-4 md:mt-0 text-gray-400">
                 &copy; 2025 Save The Children. All rights reserved.
             </div>
         </div>
     </footer>
-
 </body>
 
 </html>
