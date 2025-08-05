@@ -6,19 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Map | Save The Children</title>
     <link href="./src/output.css" rel="stylesheet">
-    <style>
-        #map {
-            width: 100%;
-            height: 400px;
-            border-radius: 0.5rem;
-        }
-    </style>
 </head>
 
 <body class="font-sans bg-white text-black dark:bg-gray-900 dark:text-white m-0 p-0 transition duration-300 ease-in-out leading-6">
 
     <!-- Header -->
-    <header class="p-4 text-center sticky top-0 z-50 bg-white dark:bg-gray-900 dark:text-white shadow-md">
+    <header class="p-4 text-center sticky top-0 z-50 bg-white shadow-md">
         <nav>
             <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap">
                 <div class="flex items-center flex-shrink-0 mr-4">
@@ -26,9 +19,8 @@
                 </div>
                 <div class="block lg:hidden">
                     <button id="menu-toggle" class="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-300 hover:bg-gray-100 focus:outline-none">
-                        <svg class="fill-current h-5 w-5" viewBox="0 0 20 20">
-                            <title>Menu</title>
-                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        <svg class="fill-current h-5 w-5" viewBox="0 0 20 20"><title>Menu</title>
+                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
                         </svg>
                     </button>
                 </div>
@@ -43,7 +35,7 @@
                         <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="testimonials.html">Testimonials</a>
                         <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="contact.html">Contact</a>
                     </div>
-                    <button id="toggle-mode" class="mt-4 lg:mt-0 ml-0 lg:ml-4 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition">ليلي</button>
+                    <button id="toggle-mode" class="mt-4 lg:mt-0 ml-0 lg:ml-4 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition">Toggle Mode</button>
                     <button id="login-btn" class="mt-4 lg:mt-0 ml-2 bg-gray-800 text-white px-3 py-2 rounded hover:bg-gray-900 transition">Login</button>
                 </div>
             </div>
@@ -66,13 +58,30 @@
 
     <!-- Main Content -->
     <main>
-        <section class="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-900 dark:text-white rounded">
-            <!-- محتوى -->
+        <section class="max-w-4xl mx-auto p-6">
+            <h1 class="text-2xl font-bold mb-4">Our Locations</h1>
+            <p class="mb-6">
+                Below you can find the main office of Save The Children and our branch in Kenya on the interactive map.
+            </p>
+            <div class="w-full h-96 rounded overflow-hidden shadow-lg border">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.857707889195!2d-73.9851306845936!3d40.74881707932743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259af18e7e8b1%3A0x6e5e6b6e7e6e6b6e!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-100 p-4 rounded shadow text-gray-800">
+                    <h2 class="font-bold text-lg mb-2">Headquarters (New York, USA)</h2>
+                    <p>Empire State Building<br>20 W 34th St, New York, NY 10001, USA</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded shadow text-gray-800">
+                    <h2 class="font-bold text-lg mb-2">Branch (Nairobi, Kenya)</h2>
+                    <p>Save the Children Kenya<br>Westlands, Nairobi, Kenya</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 dark:bg-gray-800 text-white mt-8">
+    <footer class="bg-gray-900 text-white mt-8">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-4 gap-4">
             <div class="mb-4 md:mb-0 flex items-center gap-2">
                 <img src="assets/images/logo.png" alt="Logo" class="h-10 w-auto object-contain bg-white rounded p-1" />
@@ -136,109 +145,10 @@
             });
 
             const toggleMode = document.getElementById('toggle-mode');
-
-            function setMode(isDark) {
-                if (isDark) {
-                    document.body.classList.add('dark');
-                    toggleMode.textContent = 'نهاري';
-                } else {
-                    document.body.classList.remove('dark');
-                    toggleMode.textContent = 'ليلي';
-                }
-            }
-            // حفظ الوضع في localStorage
-            if (localStorage.getItem('theme') === 'dark') {
-                setMode(true);
-            } else {
-                setMode(false);
-            }
             toggleMode.addEventListener('click', function() {
-                const isDark = !document.body.classList.contains('dark');
-                setMode(isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                document.body.classList.toggle('dark');
             });
         });
-
-        let map, hqMarker, branchMarker;
-        const hq = {
-            lat: 40.748817,
-            lng: -73.985428
-        };
-        const branch = {
-            lat: -1.2648,
-            lng: 36.8001
-        };
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: hq,
-                zoom: 13
-            });
-
-            hqMarker = new google.maps.Marker({
-                position: hq,
-                map,
-                title: "Headquarters - Save The Children",
-                label: {
-                    text: "HQ",
-                    color: "white",
-                    fontWeight: "bold"
-                },
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 12,
-                    fillColor: "#e11d48",
-                    fillOpacity: 1,
-                    strokeWeight: 2,
-                    strokeColor: "#fff"
-                }
-            });
-
-            branchMarker = new google.maps.Marker({
-                position: branch,
-                map,
-                title: "Kenya Branch - Save The Children",
-                label: {
-                    text: "KE",
-                    color: "white",
-                    fontWeight: "bold"
-                },
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 12,
-                    fillColor: "#1e293b",
-                    fillOpacity: 1,
-                    strokeWeight: 2,
-                    strokeColor: "#fff"
-                }
-            });
-
-            document.getElementById('goto-hq').addEventListener('click', function() {
-                map.setCenter(hq);
-                map.setZoom(13);
-                hqMarker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(() => hqMarker.setAnimation(null), 1400);
-            });
-
-            document.getElementById('goto-branch').addEventListener('click', function() {
-                map.setCenter(branch);
-                map.setZoom(14);
-                branchMarker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(() => branchMarker.setAnimation(null), 1400);
-            });
-        }
-
-        document.getElementById('goto-hq').addEventListener('click', function() {
-            map.setCenter(hq);
-            map.setZoom(13);
-        });
-
-        document.getElementById('goto-branch').addEventListener('click', function() {
-            map.setCenter(branch);
-            map.setZoom(13);
-        });
-    </script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 </body>
 
