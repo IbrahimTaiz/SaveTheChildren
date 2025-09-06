@@ -5,160 +5,303 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Save The Children</title>
-    <link href="./src/output.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
-<body class="font-sans bg-white text-black dark:bg-gray-900 dark:text-white m-0 p-0 transition duration-300 ease-in-out leading-6">
-    <header class="p-4 text-center sticky top-0 z-50 bg-white shadow-md">
+<body>
+    <header>
         <nav>
-            <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap">
-                <div class="flex items-center flex-shrink-0 mr-4">
-                    <img src="assets/images/logo.png" alt="Logo" class="h-16 w-auto object-contain" />
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo" class="logo" />
+            </div>
+            <div class="flex items-center">
+                <div id="mobile-controls" class="flex items-center">
+                    <button id="dark-mode-toggle-mobile" class="btn">
+                        <svg id="sun-icon-mobile" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66l-.707.707M4.04 4.04l-.707.707M21 12h-1M4 12H3m16.66 4.95l-.707-.707M4.04 19.96l-.707-.707M12 6a6 6 0 100 12 6 6 0 000-12z" />
+                        </svg>
+                        <svg id="moon-icon-mobile" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                    <div class="menu-toggle">
+                        <button id="menu-toggle">
+                            <svg id="menu-open-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="menu-close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="block lg:hidden">
-                    <button id="menu-toggle" class="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-300 hover:bg-gray-100 focus:outline-none">
-                    <svg class="fill-current h-5 w-5" viewBox="0 0 20 20"><title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+            </div>
+            <div id="menu-links" class="nav-links">
+                <div>
+                    <a class="nav-link" data-section="home">Home</a>
+                    <a class="nav-link" data-section="about">About</a>
+                    <a class="nav-link" data-section="projects">Projects</a>
+                    <a class="nav-link" data-section="blog">Blog</a>
+                    <a class="nav-link" data-section="donate">Donate</a>
+                    <a class="nav-link" data-section="map">Map</a>
+                    <a class="nav-link" data-section="testimonials">Testimonials</a>
+                    <a class="nav-link" data-section="contact">Contact</a>
+                </div>
+                <button id="dark-mode-toggle" class="btn">
+                    <svg id="sun-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66l-.707.707M4.04 4.04l-.707.707M21 12h-1M4 12H3m16.66 4.95l-.707-.707M4.04 19.96l-.707-.707M12 6a6 6 0 100 12 6 6 0 000-12z" />
+                    </svg>
+                    <svg id="moon-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                </div>
-                <div id="menu-links" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block transition-all duration-300">
-                    <div class="text-sm lg:flex-grow">
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="index.html">Home</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="about.html">About</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="projects.html">Projects</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="blog.html">Blog</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="donate.html">Donate</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="map.html">Map</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="testimonials.html">Testimonials</a>
-                        <a class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:bg-red-600 hover:text-white px-3 py-2 rounded transition" href="contact.html">Contact</a>
-                    </div>
-                    <button id="Night" class="mt-4 lg:mt-0 ml-0 lg:ml-4 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition">Night</button>
-                    <button id="login-btn" class="mt-4 lg:mt-0 ml-2 bg-gray-800 text-white px-3 py-2 rounded hover:bg-gray-900 transition">Login</button>
-                </div>
+                <button id="login-btn" class="btn btn-secondary">Login</button>
             </div>
         </nav>
     </header>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('menu-toggle');
-            const menu = document.getElementById('menu-links');
-            toggle.addEventListener('click', function() {
-                menu.classList.toggle('hidden');
-            });
-            const loginBtn = document.getElementById('login-btn');
-            const loginModal = document.getElementById('login-modal');
-            const closeLogin = document.getElementById('close-login');
-            const loginForm = document.getElementById('login-form');
-            const loginError = document.getElementById('login-error');
-
-            function encode(str) {
-                return btoa(unescape(encodeURIComponent(str)));
-            }
-
-            function decode(str) {
-                return decodeURIComponent(escape(atob(str)));
-            }
-            loginBtn.addEventListener('click', () => {
-                loginModal.classList.remove('hidden');
-                loginError.classList.add('hidden');
-                loginForm.reset();
-            });
-            closeLogin.addEventListener('click', () => {
-                loginModal.classList.add('hidden');
-            });
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const username = document.getElementById('username').value.trim();
-                const password = document.getElementById('password').value.trim();
-                if (username === 'admin' && password === 'admin') {
-                    // Store encrypted in localStorage
-                    localStorage.setItem('user', encode(username));
-                    localStorage.setItem('pass', encode(password));
-                    loginModal.classList.add('hidden');
-                    alert('Login successful!');
-                } else {
-                    loginError.classList.remove('hidden');
-                }
-            });
-            const toggleMode = document.getElementById('night');
-            toggleMode.addEventListener('click', function() {
-                document.body.classList.toggle('dark');
-            });
-        });
-    </script>
-    <div id="login-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 hidden">
-        <div class="bg-white rounded shadow-lg p-6 w-full max-w-xs">
-            <h2 class="text-lg font-bold mb-4 text-center">Login</h2>
+    <div id="login-modal" class="hidden">
+        <div class="login-content">
+            <h2>Login</h2>
             <form id="login-form">
-                <input id="username" type="text" placeholder="Username" required class="w-full mb-2 px-3 py-2 border rounded" />
-                <input id="password" type="password" placeholder="Password" required class="w-full mb-4 px-3 py-2 border rounded" />
-                <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Submit</button>
-                <button type="button" id="close-login" class="w-full mt-2 bg-gray-200 text-gray-800 py-2 rounded hover:bg-gray-300 transition">Cancel</button>
+                <input id="username" type="text" placeholder="Username" required />
+                <input id="password" type="password" placeholder="Password" required />
+                <button type="submit" class="btn-submit">Submit</button>
+                <button type="button" id="close-login" class="btn-cancel">Cancel</button>
             </form>
-            <p id="login-error" class="text-red-600 text-sm mt-2 text-center hidden">Invalid credentials</p>
+            <p id="login-error">Invalid credentials</p>
         </div>
     </div>
 
     <main>
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-            <h2 class="col-span-full text-xl font-bold mb-2">Our Projects</h2>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project1.jpg" alt="Education for All" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Education for All</h3>
-                <p>Providing quality education and school supplies to children in rural areas.</p>
+        <section id="home" class="animate-on-scroll">
+            <h2>Welcome to Save The Children</h2>
+            <p>This is the home section. Here you can find a welcome message, introduction to the organization, featured projects, and a call-to-action.</p>
+            <button class="btn btn-primary">Donate Now</button>
+        </section>
+
+        <section id="about" class="hidden animate-on-scroll">
+            <h2>About Us</h2>
+            <div>
+                <h3>Our Mission</h3>
+                <p>To inspire breakthroughs in the way the world treats children, and to achieve immediate and lasting change in their lives.</p>
             </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project2.jpg" alt="Healthy Start" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Healthy Start</h3>
-                <p>Ensuring access to healthcare and nutrition for newborns and mothers.</p>
+            <div>
+                <h3>Our Vision</h3>
+                <p>A world in which every child attains the right to survival, protection, development and participation.</p>
             </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project3.jpg" alt="Safe Spaces" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Safe Spaces</h3>
-                <p>Creating safe environments for children affected by conflict and disasters.</p>
+            <div>
+                <h3>Our Values</h3>
+                <ul>
+                    <li>Accountability</li>
+                    <li>Ambition</li>
+                    <li>Collaboration</li>
+                    <li>Creativity</li>
+                    <li>Integrity</li>
+                </ul>
             </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project4.jpg" alt="Empowering Girls" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Empowering Girls</h3>
-                <p>Supporting girls’ education and leadership in their communities.</p>
+            <div>
+                <h3>Our Team</h3>
+                <div class="grid">
+                    <div class="team-member">
+                        <img src="assets/images/team1.jpg" alt="Team Member 1" />
+                        <h4>Jane Doe</h4>
+                        <p>CEO</p>
+                        <p>Jane has over 20 years of experience in non-profit leadership.</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="assets/images/team2.jpg" alt="Team Member 2" />
+                        <h4>John Smith</h4>
+                        <p>Programs Director</p>
+                        <p>John oversees all our educational and health programs.</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="assets/images/team3.jpg" alt="Team Member 3" />
+                        <h4>Emily White</h4>
+                        <p>Community Outreach</p>
+                        <p>Emily connects us with local communities and volunteers.</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project5.jpg" alt="Clean Water Initiative" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Clean Water Initiative</h3>
-                <p>Providing clean and safe drinking water to underserved villages.</p>
-            </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project6.jpg" alt="Child Protection" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Child Protection</h3>
-                <p>Protecting children from abuse, exploitation, and neglect.</p>
-            </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project7.jpg" alt="Youth Skills Training" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Youth Skills Training</h3>
-                <p>Equipping youth with vocational and life skills for a better future.</p>
-            </div>
-            <div class="bg-gray-100 border border-gray-300 p-4 rounded text-center">
-                <img src="assets/images/project8.jpg" alt="Emergency Relief" class="w-full h-40 object-cover rounded mb-2" />
-                <h3>Emergency Relief</h3>
-                <p>Delivering urgent aid and support to families during crises and disasters.</p>
+            <div>
+                <h3>Our History</h3>
+                <p>Founded in 1919, Save The Children has grown to become a leading independent organization for children, working in over 100 countries worldwide.</p>
             </div>
         </section>
+
+        <section id="contact" class="hidden animate-on-scroll">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                    <p id="name-error" class="hidden">Please enter a valid name (letters, spaces, hyphens, apostrophes only).</p>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                    <p id="email-error" class="hidden">Please enter a valid email address.</p>
+                </div>
+                <div>
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required aria-required="true">
+                    <p id="subject-error" class="hidden">Please enter a subject.</p>
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                    <p id="message-error" class="hidden">Please enter your message.</p>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </form>
+            <div class="text-center">
+                <h3>Contact Details:</h3>
+                <p><span>Email:</span> info@savethechildren.org</p>
+                <p><span>Phone:</span> +1 234 567 890</p>
+                <p><span>Address:</span> 123 Hope Street, City, Country</p>
+                <div>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="hidden animate-on-scroll">
+            <h2 class="col-span-full">Our Projects</h2>
+            <div>
+                <button class="filter-btn" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="education">Education</button>
+                <button class="filter-btn" data-filter="health">Health</button>
+                <button class="filter-btn" data-filter="protection">Protection</button>
+                <button class="filter-btn" data-filter="empowerment">Empowerment</button>
+                <button class="filter-btn" data-filter="water">Water</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+                <button class="filter-btn" data-filter="relief">Relief</button>
+                <input type="text" id="project-search" placeholder="Search projects...">
+            </div>
+            <div class="grid">
+                <div class="project-card" data-category="education">
+                    <img src="assets/images/project1.jpg" alt="Education for All" />
+                    <h3>Education for All</h3>
+                    <p>Providing quality education and school supplies to children in rural areas.</p>
+                </div>
+                <div class="project-card" data-category="health">
+                    <img src="assets/images/project2.jpg" alt="Healthy Start" />
+                    <h3>Healthy Start</h3>
+                    <p>Ensuring access to healthcare and nutrition for newborns and mothers.</p>
+                </div>
+                <div class="project-card" data-category="protection">
+                    <img src="assets/images/project3.jpg" alt="Safe Spaces" />
+                    <h3>Safe Spaces</h3>
+                    <p>Creating safe environments for children affected by conflict and disasters.</p>
+                </div>
+                <div class="project-card" data-category="empowerment">
+                    <img src="assets/images/project4.jpg" alt="Empowering Girls" />
+                    <h3>Empowering Girls</h3>
+                    <p>Supporting girls’ education and leadership in their communities.</p>
+                </div>
+                <div class="project-card" data-category="water">
+                    <img src="assets/images/project5.jpg" alt="Clean Water Initiative" />
+                    <h3>Clean Water Initiative</h3>
+                    <p>Providing clean and safe drinking water to underserved villages.</p>
+                </div>
+                <div class="project-card" data-category="protection">
+                    <img src="assets/images/project6.jpg" alt="Child Protection" />
+                    <h3>Child Protection</h3>
+                    <p>Protecting children from abuse, exploitation, and neglect.</p>
+                </div>
+                <div class="project-card" data-category="training">
+                    <img src="assets/images/project7.jpg" alt="Youth Skills Training" />
+                    <h3>Youth Skills Training</h3>
+                    <p>Equipping youth with vocational and life skills for a better future.</p>
+                </div>
+                <div class="project-card" data-category="relief">
+                    <img src="assets/images/project8.jpg" alt="Emergency Relief" />
+                    <h3>Emergency Relief</h3>
+                    <p>Delivering urgent aid and support to families during crises and disasters.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="hidden animate-on-scroll">
+            <h2>Our Blog</h2>
+            <div id="blog-posts-container" class="grid"></div>
+        </section>
+
+        <section id="testimonials" class="hidden animate-on-scroll">
+            <h2>Testimonials</h2>
+            <div class="grid">
+                <div class="testimonial">
+                    <p>"Save The Children changed my life. Their support helped me finish school and pursue my dreams."</p>
+                    <p>- Aisha, Beneficiary</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Volunteering with Save The Children has been an incredibly rewarding experience. I've seen firsthand the impact they make."</p>
+                    <p>- Mark, Volunteer</p>
+                </div>
+                <div class="testimonial">
+                    <p>"The dedication of the team at Save The Children is truly inspiring. They are making a real difference."</p>
+                    <p>- Dr. Lena, Partner Organization</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="donate" class="hidden animate-on-scroll">
+            <h2>Donate</h2>
+            <form id="donation-form">
+                <div>
+                    <label for="donation-amount">Donation Amount ($):</label>
+                    <input type="number" id="donation-amount" name="amount" min="1" required aria-required="true">
+                    <p id="donation-amount-error" class="hidden">Please enter a valid donation amount (minimum $1).</p>
+                </div>
+                <div>
+                    <label for="donor-name">Your Name (Optional):</label>
+                    <input type="text" id="donor-name" name="donorName">
+                </div>
+                <div>
+                    <label for="donor-email">Your Email (Optional):</label>
+                    <input type="email" id="donor-email" name="donorEmail">
+                    <p id="donor-email-error" class="hidden">Please enter a valid email address.</p>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Donate Now</button>
+                </div>
+            </form>
+            <div>
+                <p>Thank you for considering a donation to Save The Children. Your support helps us make a difference in the lives of children worldwide.</p>
+            </div>
+        </section>
+
+        <section id="map-header" class="hidden animate-on-scroll">
+            <h2>Our Locations</h2>
+            <div id="map-buttons">
+                <button id="org-location-btn" class="btn btn-primary">Organization Main Office</button>
+                <button id="taiz-location-btn" class="btn btn-primary">Taiz, Yemen</button>
+                <button id="global-locations-btn" class="btn btn-primary">Global Locations</button>
+            </div>
+        </section>
+        <section id="map" class="hidden animate-on-scroll">
+            <div id="map"></div>
+        </section>
     </main>
-    <div id="toast " class="toast "></div>
-    <script src="js/script.js "></script>
-    <footer class="bg-gray-900 text-white mt-8">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-4 gap-4">
-            <div class="mb-4 md:mb-0 flex items-center gap-2">
-                <img src="assets/images/logo.png" alt="Logo" class="h-10 w-auto object-contain bg-white rounded p-1" />
-                <span class="font-bold text-lg"></span>
+    <div id="toast" class="toast"></div>
+    <script src="js/script.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/images/logo.png" alt="Logo" />
+                <span></span>
             </div>
-            <div class="text-center md:text-left">
-                <p class="mb-1"><span class="font-semibold">Email:</span> info@savethechildren.org</p>
-                <p class="mb-1"><span class="font-semibold">Phone:</span> +1 234 567 890</p>
-                <p class="mb-1"><span class="font-semibold">Address:</span> 123 Hope Street, City, Country</p>
+            <div class="footer-contact">
+                <p><span>Email:</span> info@savethechildren.org</p>
+                <p><span>Phone:</span> +1 234 567 890</p>
+                <p><span>Address:</span> 123 Hope Street, City, Country</p>
             </div>
-            <div class="text-sm mt-4 md:mt-0 text-gray-400">
+            <div class="footer-copy">
                 &copy; 2025 Save The Children. All rights reserved.
             </div>
         </div>
