@@ -1,0 +1,48 @@
+# اسم سير العمل
+name: Deploy to Vercel
+
+# متى يتم تشغيل سير العمل
+on:
+  # سيتم التشغيل في كل 'Push' على الفرع 'main'
+  push:
+    branches:
+      - main
+  # سيتم التشغيل في كل 'Pull Request' على الفرع 'main' لإنشاء بيئة معاينة (Preview)
+  pull_request:
+    branches:
+      - main
+
+# المهام
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # الخطوة 1: جلب الكود من المستودع
+      - uses: actions/checkout@v4
+
+      # الخطوة 2: تثبيت Node.js (عدّل الإصدار حسب الحاجة)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # الخطوة 3: تثبيت الاعتمادات
+      - name: Install dependencies
+        run: npm install
+
+      # الخطوة 4: (اختياري) تشغيل البناء/التحقق
+      # يمكنك إضافة خطوة هنا لتشغيل الاختبارات (npm run test) قبل النشر
+
+      # الخطوة 5: نشر المشروع إلى Vercel باستخدام الإجراء المخصص
+      # هذا الإجراء الرسمي من Vercel سيتولى البناء والنشر
+      - name: Deploy to Vercel Action
+        uses: vercel/actions@v1
+        with:
+          # الرمز الشخصي الذي أضفته كسر
+          token: ${{ secrets.VERCEL_TOKEN }}
+          # معرف المنظمة/المشروع الذي أضفتهما كأسرار
+          org-id: ${{ secrets.VERCEL_ORG_ID }}
+          project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          # إذا كان 'Push' على فرع الإنتاج (main)، استخدم أمر 'prod'
+          # وإلا سيتم إنشاء بيئة معاينة للـ Pull Request
+          vercel-args: ${{ github.event_name == 'push' && '--prod' || '' }}
